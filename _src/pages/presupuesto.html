@@ -1,0 +1,80 @@
+<!--
+title: Pide presupuesto | Diseños y reformas River's
+description: Pide presupuesto gratis y sin compromiso para tu reforma integral, baño, cocina o construcción desde plano en la Comunidad de Madrid.
+current: none
+scripts: formulario
+-->
+<section class="page-head" aria-labelledby="t">
+  <h1 id="t" class="reveal">Tu presupuesto, sin compromiso</h1>
+  <p class="page-lead reveal">Cuéntanos qué obra quieres hacer y te preparamos una propuesta adaptada. Cuantos más detalles nos des, más ajustado será.</p>
+</section>
+<div class="strip slim shutter">
+  <img src="img/obra-terraza-2.jpg" alt="Terraza con jacuzzi y pérgola" width="1200" height="1600">
+  <img src="img/foto10.jpg" alt="Cocina con muebles verde agua" width="1000" height="1000">
+  <img src="img/bano-5.jpg" alt="Baño con espejo redondo iluminado" width="544" height="730">
+  <img src="img/salon-comedor.jpg" alt="Salón comedor reformado" width="1600" height="1600">
+</div>
+
+<section class="form-wrap" aria-labelledby="f-h">
+  <div class="form-aside">
+    <h2 id="f-h" class="reveal">Tu obra</h2>
+    <p class="reveal">Al enviar se abre tu WhatsApp o tu correo con todo ya escrito; solo tienes que darle a enviar.</p>
+    <img class="reveal" src="img/obra-bano-2.jpg" alt="Baño reformado con mueble de madera" width="1200" height="1600" loading="lazy" style="margin-top:12px;aspect-ratio:4/5;object-fit:cover">
+  </div>
+  <form class="form" data-formulario="Solicitud de presupuesto desde la web" novalidate>
+    <p class="form-note full">Los campos con * son obligatorios.</p>
+    <label>Tipo de obra *
+      <select id="pres-obra" name="obra" required data-nombre="Tipo de obra">
+        <option value="">Elige una opción</option>
+        <option>Reforma integral</option>
+        <option>Reforma de baño</option>
+        <option>Reforma de cocina</option>
+        <option>Construcción desde plano</option>
+        <option>Muebles o cocina a medida</option>
+        <option>Otra</option>
+      </select></label>
+    <label>Tipo de inmueble
+      <select id="pres-inmueble" name="inmueble" data-nombre="Tipo de inmueble">
+        <option value="">Elige una opción</option>
+        <option>Piso</option>
+        <option>Chalet o adosado</option>
+        <option>Local comercial</option>
+        <option>Oficina</option>
+        <option>Terreno</option>
+      </select></label>
+    <label>Metros aproximados<input id="pres-metros" name="metros" inputmode="numeric" placeholder="Por ejemplo, 80 m²" data-nombre="Metros aproximados"></label>
+    <label>Municipio *<input id="pres-municipio" name="municipio" required placeholder="Por ejemplo, Arganda del Rey" data-nombre="Municipio"></label>
+    <label class="full">¿Cuándo te gustaría empezar?
+      <select id="pres-cuando" name="cuando" data-nombre="Cuándo empezar">
+        <option value="">Elige una opción</option>
+        <option>Lo antes posible</option>
+        <option>En 1 a 3 meses</option>
+        <option>En más de 3 meses</option>
+        <option>Solo quiero informarme</option>
+      </select></label>
+    <label class="full">Cuéntanos tu proyecto *<textarea id="pres-mensaje" name="mensaje" rows="5" required data-nombre="Descripción" placeholder="Qué quieres cambiar, estado actual, materiales que te gustan..."></textarea></label>
+    <label>Nombre *<input id="pres-nombre" name="nombre" required autocomplete="name" data-nombre="Nombre"></label>
+    <label>Teléfono *<input id="pres-telefono" name="telefono" type="tel" required autocomplete="tel" data-nombre="Teléfono"></label>
+    <label class="full">Email<input id="pres-email" name="email" type="email" autocomplete="email" data-nombre="Email"></label>
+    <label class="check full"><input id="pres-comercial" type="checkbox" name="comercial" data-nombre="Acepta comunicaciones comerciales"><span>Autorizo a que me contactéis por email o por cualquier medio con fines comerciales.</span></label>
+    <label class="check full"><input id="pres-privacidad" type="checkbox" name="privacidad" required data-nombre="aceptar la Política de Privacidad"><span>He leído y acepto la <a class="ulink" href="politica-de-privacidad.html">Política de Privacidad</a> *</span></label>
+    <p class="form-error full hidden" role="alert"></p>
+    <div class="form-actions full">
+      <button type="submit" class="btn" data-via="whatsapp">Enviar por WhatsApp</button>
+      <button type="submit" class="btn alt" data-via="email">Enviar por email</button>
+    </div>
+  </form>
+
+  <ol class="steps" aria-label="Cómo funciona">
+    <li class="reveal"><strong>Nos cuentas tu idea</strong><span>Rellena el formulario o escríbenos por WhatsApp.</span></li>
+    <li class="reveal"><strong>Te asesoramos</strong><span>Te llamamos para resolver dudas y, si hace falta, visitamos la obra.</span></li>
+    <li class="reveal"><strong>Te enviamos la propuesta</strong><span>Un presupuesto claro y adaptado a lo que necesitas, sin compromiso.</span></li>
+  </ol>
+</section>
+
+<section class="close" aria-label="Llamar">
+  <p class="reveal">¿Prefieres contárnoslo de palabra? Llámanos y lo vemos juntas.</p>
+  <div class="cta-actions reveal">
+    <a class="btn" href="tel:+34614239410">Llamar al 614 239 410</a>
+  </div>
+</section>

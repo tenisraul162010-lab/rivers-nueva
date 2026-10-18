@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tenisraul162010-lab.github.io/rivers-web/sitemap.xml
