@@ -833,3 +833,52 @@ html { scrollbar-color: var(--nude) var(--ground); accent-color: var(--accent); 
   .wall:hover .brick img { filter: saturate(.75) brightness(.92); }
   .wall .brick:hover img { transform: scale(1.06); filter: none; }
 }
+
+/* ═════════ Colores de River's: naranja, beige y blanco (sin negros ni rojos) ═════════
+   Lo pidió Karol: "naranjas, beige, blancos", minimalista. */
+:root {
+  --ink: #3a2c26;          /* texto marrón muy oscuro, más cálido que el negro */
+  --ink-soft: #6e5c54;
+  --accent: #d9743f;       /* naranja */
+  --accent-press: #c4632f;
+  --ground-2: #fbf1ea;     /* beige claro */
+  --nude: #f1ddd0;         /* beige del logo */
+  --beige: #f6e6da;
+}
+.btn { font-weight: 600; }
+
+/* Placa del nombre en la portada: beige en vez de negro */
+.hero-panel { background: var(--ground-2); color: var(--ink); }
+.hero-panel .wordmark { color: var(--accent); }
+
+/* Bloques que eran negros pasan a beige */
+.field { background: var(--beige); color: var(--ink); }
+.field .field-note { color: var(--ink-soft); }
+.field li { padding-left: 1.4em; position: relative; }
+.field li::before { content: ""; position: absolute; left: 0; top: .55em; width: .55em; height: .3em; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+.t-head { background: var(--accent); }
+.s1 { background: var(--accent); }
+.bar-menu summary { background: var(--accent); color: #fff; }
+.bar-menu[open] summary { background: var(--accent-press); }
+.filters button[aria-pressed="true"] { background: var(--accent); color: #fff; }
+.btn.alt { background: var(--nude); color: var(--ink); }
+.btn.alt:hover { background: #e9cdbb; }
+.ad .ad-etiqueta { background: var(--ink-soft); }
+.ad .ad-etiqueta.der { background: var(--accent); }
+
+/* Visor de fotos claro */
+.viewer, .viewer::backdrop { background: rgba(251, 241, 234, .97); }
+.viewer { color: var(--ink); }
+.viewer button { background: var(--nude); color: var(--ink); }
+.viewer button:hover { background: #e9cdbb; }
+.viewer { scrollbar-color: var(--nude) transparent; }
+/* Contraste con el naranja: texto oscuro sobre naranja y naranja más hondo para texto sobre blanco */
+:root { --on-accent: #2b201b; --accent-text: #a9501d; }
+.btn, .t-cta, .t-head, .bar-menu summary, .bar-menu[open] summary, .filters button[aria-pressed="true"],
+.s2, .ad .ad-etiqueta.der, .bar-menu nav .btn, .hero-panel .btn { color: var(--on-accent); }
+.t-head h2 { color: var(--on-accent); }
+.bar-links a:not(.btn):hover, .bar-links a[aria-current="page"], .drop > button:hover, .drop.is-current > button,
+.l-go, .ulink:hover, .foot-full a:hover { color: var(--accent-text); }
+::selection { background: var(--nude); color: var(--ink); }
+:focus-visible { outline-color: var(--accent-text); }
+.hero-panel .wordmark { color: #c05a26; }
