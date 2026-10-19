@@ -98,7 +98,8 @@ function page({ title, description, current, scripts, robots }, body, file) {
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#ffffff">
 <title>${title}</title>
 <meta name="description" content="${description}">
 ${robots ? `<meta name="robots" content="${robots}">\n` : ''}<link rel="icon" type="image/png" href="img/favicon.png">
@@ -110,16 +111,17 @@ ${robots ? `<meta name="robots" content="${robots}">\n` : ''}<link rel="icon" ty
 <meta property="og:image" content="https://tenisraul162010-lab.github.io/rivers-web/img/og.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600&family=Fraunces:opsz,wght,SOFT@9..144,400..600,100&display=swap" rel="stylesheet">
 <link rel="canonical" href="https://tenisraul162010-lab.github.io/rivers-web/${file}">
 <link rel="stylesheet" href="css/rivers-nueva.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>
 <body>
+<a class="skip" href="#main">Saltar al contenido</a>
 
 ${bar(current, file)}
 
-<main>
+<main id="main">
 ${body.trim()}
 </main>
 

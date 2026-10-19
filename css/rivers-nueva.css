@@ -882,3 +882,59 @@ html { scrollbar-color: var(--nude) var(--ground); accent-color: var(--accent); 
 ::selection { background: var(--nude); color: var(--ink); }
 :focus-visible { outline-color: var(--accent-text); }
 .hero-panel .wordmark { color: #c05a26; }
+
+/* ═════════ Pulido con todas las skills (taste, impeccable, minimalist-ui, Emil) ═════════ */
+
+/* Títulos en una serif suave y cálida (Fraunces), a juego con el logo de acuarela; el texto sigue en Bricolage */
+:root { --serif: 'Fraunces', Georgia, serif; }
+h1, h2, .wordmark, .proof-h, .quote-one blockquote, .about-text, .proof-text, .cta-line, .close p, .contact-line {
+  font-family: var(--serif);
+  font-variation-settings: "SOFT" 100, "opsz" 96;
+}
+h1, h2, .wordmark, .proof-h { font-weight: 500; letter-spacing: -0.025em; }
+.hero-panel .wordmark { font-weight: 600; letter-spacing: -0.03em; }
+.l-name, .run-title, .rows dt, .t-head h2 { font-family: inherit; font-variation-settings: normal; }
+h1, h2, .proof-h, .hero-line { text-wrap: balance; }
+p, li, blockquote, dd { text-wrap: pretty; }
+
+/* Hecho por nosotras: foto grande de una obra y los datos en grande */
+.feature { padding: 40px var(--margin) 40px; display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 6vw; align-items: center; }
+.feature-photo img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; }
+.feature-text { display: grid; gap: 28px; align-content: center; }
+.feature-text h2 { font-size: var(--step-head); line-height: 1; }
+.feature-facts { display: grid; gap: 0; }
+.feature-facts { gap: 8px; }
+.feature-facts li { font-size: var(--step-lead); line-height: 1.3; padding: 18px 20px; background: var(--ground-2); }
+
+/* Menos huecos vacíos al final */
+.cta { padding-top: 140px; padding-bottom: 140px; }
+.contact { padding-top: 120px; padding-bottom: 100px; }
+.foot.foot-full { padding-top: 96px; }
+
+/* "Por qué River's" a tamaño de lectura */
+.facts, .record, .facts-word { font-size: var(--step-body); }
+.about-row.two { grid-template-columns: calc(34vw - var(--margin)) minmax(0, 1fr) minmax(0, 1fr); column-gap: 48px; }
+.record li { gap: 24px; }
+
+/* Saltar al contenido (teclado) */
+.skip { position: absolute; left: 12px; top: -60px; z-index: 50; padding: 12px 16px; background: var(--accent); color: var(--on-accent); text-decoration: none; transition: top .2s var(--ease-out); }
+.skip:focus { top: 12px; }
+
+/* Base de móvil (Emil · mobile-native) */
+html { -webkit-tap-highlight-color: transparent; }
+button, a, [role="button"], summary { touch-action: manipulation; }
+.btn, button, summary, .filters button { user-select: none; -webkit-user-select: none; }
+input, select, textarea { font-size: max(16px, 1em); }
+.bar { padding-top: max(8px, env(safe-area-inset-top)); }
+.wa { bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+
+@media (max-width: 1100px) {
+  .about-row.two { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 760px) {
+  .feature { grid-template-columns: 1fr; padding: 24px 20px 40px; gap: 32px; }
+  .feature-photo { margin: 0 -20px; }
+  .about-row.two { grid-template-columns: 1fr; }
+  .cta { padding-top: 96px; padding-bottom: 96px; }
+}
+.legal a { color: var(--accent-text); }
