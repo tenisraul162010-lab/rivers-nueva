@@ -1388,3 +1388,20 @@ input, textarea, select { font-size: max(16px, 1em); }
   body:has(.bar-menu[open]) { overflow: hidden; }
   body:has(.bar-menu[open]) .wa { opacity: 0; pointer-events: none; }
 }
+
+/* La foto del andamio tiene a una arriba y a otra abajo: se muestra entera, nunca recortada en apaisado */
+main .contact { align-items: center; }
+main .contact-photo { contain: none; grid-column: 9 / 13; grid-row: 1 / 3; align-self: center; width: 100%; height: auto; min-height: 0; aspect-ratio: 626 / 838; object-fit: cover; }
+main .contact-line, main .contact-links { grid-column: 1 / 8; }
+main .contact-line { align-self: end; }
+main .contact-links { align-self: start; }
+@media (max-width: 760px) {
+  main .contact-photo { grid-column: 1; grid-row: auto; aspect-ratio: 626 / 838; height: auto; }
+  main .strip img[src*="qs-1"] { height: auto; aspect-ratio: 626 / 838; }
+}
+@media (max-width: 760px) {
+  /* Tira de tres fotos: la primera a lo ancho y las otras dos juntas, sin una foto suelta con hueco al lado */
+  main .strip img:first-child:nth-last-child(3) ~ img:last-child { grid-column: auto; }
+  main .contact-photo { justify-self: stretch; max-width: none; }
+}
+@media (max-width: 760px) { main .contact-line, main .contact-links, main .contact-photo { grid-column: 1 / -1; } }
