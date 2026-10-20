@@ -158,3 +158,93 @@
     document.addEventListener('click', function (e) { if (!d.contains(e.target)) { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); } });
     d.addEventListener('keydown', function (e) { if (e.key === 'Escape') { d.classList.remove('open'); b.setAttribute('aria-expanded', 'false'); b.focus(); } });
   });})();
+
+// Modo grabación: tapa los datos privados para grabar la pantalla y enseñar la web.
+// Se enciende con ?grabar en la dirección y sigue encendido al cambiar de página; ?grabar=0 lo apaga.
+// La web real no cambia: solo se tapa en la pestaña donde se activa.
+(function () {
+  // También vale #grabar, por si el servidor quita el ?grabar al redirigir
+  var q = new URLSearchParams(location.search + '&' + location.hash.slice(1)), on = false;
+  try {
+    if (q.has('grabar')) sessionStorage.setItem('grabar', q.get('grabar') === '0' ? '0' : '1');
+    on = sessionStorage.getItem('grabar') === '1';
+  } catch (e) { on = q.has('grabar') && q.get('grabar') !== '0'; }
+  if (!on) return;
+
+  var css = document.createElement('style');
+  css.textContent =
+    '.privado{filter:blur(.14em);user-select:none}' +
+    'img.privado-img{filter:blur(8px);clip-path:inset(0)}' +
+    '.wa svg,.wa img{filter:blur(2px)}';
+  document.head.appendChild(css);
+
+  // Teléfono, correo, dirección, NIF, nombre completo de la titular, nombres de clientes, nombre de la empresa
+  // y todo lo que identifica a otras empresas o entidades (Google, WhatsApp, el concurso, la AEPD, la norma UNE)
+  var patrones = [
+    /(\+?34[\s.]?)?[6789]\d{2}[\s.]?\d{3}[\s.]?\d{3}/g,
+    /[\w.+-]+@[\w-]+\.[\w.]+/g,
+    /Calle\s+carretera\s+de\s+loeches,?\s*6\s*,?/gi,
+    /\b28500\b/g,
+    /\b[XYZ]?\d{7,8}[A-Z]\b/g,
+    /KAROL\s+CASTRO\s+GARAVITO/gi,
+    /\b(Miguel M|Aurelio C|Adriana V|Milagros P)\./g,
+    /(Diseños\s+y\s+reformas\s+|Reformas\s+)?\bRiver['’]?s\b/g,
+    /\b(Karol|Claudia)\b/g,
+    /\bGoogle(\s+(Maps|Fonts))?\b/g,
+    /\bWhatsApp\b/g,
+    /\b(el\s+)?II\s+Concurso\s+Nacional\s+de\s+Albañilería\s+Femenino\b/g,
+    /\bPlasencia\b/g,
+    /\bAgencia\s+Española\s+de\s+Protección\s+de\s+Datos\b/g,
+    /\bUNE-EN\s+[\d:]+/g
+  ];
+  // Cambia cada letra y cifra por otra al azar: al desenfocarlo parece texto, pero el dato real ya no está
+  function revolver(t) {
+    return t.replace(/[a-záéíóúñ]/g, function () { return 'abcdefghilmnoprstu'[Math.random() * 18 | 0]; })
+            .replace(/[A-ZÁÉÍÓÚÑ]/g, function () { return 'ABCDEGHLMNPRST'[Math.random() * 14 | 0]; })
+            .replace(/\d/g, function () { return Math.random() * 10 | 0; });
+  }
+  var re = new RegExp(patrones.map(function (p) { return p.source; }).join('|'), 'gi');
+
+  var walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (n) {
+      if (!n.nodeValue.trim() || /^(SCRIPT|STYLE)$/.test(n.parentNode.nodeName)) return NodeFilter.FILTER_REJECT;
+      re.lastIndex = 0;
+      return re.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+    }
+  });
+  var nodos = [];
+  while (walker.nextNode()) nodos.push(walker.currentNode);
+  nodos.forEach(function (n) {
+    var frag = document.createDocumentFragment(), txt = n.nodeValue, last = 0;
+    re.lastIndex = 0;
+    txt.replace(re, function (m, a, i) {
+      var idx = arguments[arguments.length - 2];
+      frag.appendChild(document.createTextNode(txt.slice(last, idx)));
+      var s = document.createElement('span');
+      s.className = 'privado';
+      s.setAttribute('aria-label', 'dato oculto');
+      s.textContent = revolver(m); // el dato real desaparece de la página, no solo se desenfoca
+      frag.appendChild(s);
+      last = idx + m.length;
+      return m;
+    });
+    frag.appendChild(document.createTextNode(txt.slice(last)));
+    n.parentNode.replaceChild(frag, n);
+  });
+
+  // Que al pasar el ratón por un enlace no salga el número o el correo abajo en el navegador
+  document.querySelectorAll('a[href^="tel:"], a[href^="mailto:"], a[href*="wa.me"], a[href*="google.com/maps"]').forEach(function (a) {
+    a.setAttribute('href', '#');
+    a.removeAttribute('target');
+    a.addEventListener('click', function (e) { e.preventDefault(); });
+  });
+  // Los botones del formulario abren WhatsApp o el correo con los datos reales: se desactivan
+  document.querySelectorAll('form').forEach(function (f) {
+    f.addEventListener('submit', function (e) { e.preventDefault(); e.stopImmediatePropagation(); }, true);
+  });
+  // El nombre de la empresa también sale en la pestaña del navegador
+  document.title = document.title.replace(re, '').replace(/^\s*\|\s*|\s*\|\s*$/g, '') || 'Reformas en Madrid';
+  // La tarjeta escrita a mano por unos clientes lleva sus nombres, el logo lleva el de la empresa
+  // y las fotos del trofeo y del muro del concurso muestran al organizador
+  document.querySelectorAll('img[src*="tarjeta-clientes"], img[src*="foto1."], img[src*="premio-concurso"], img[src*="equipo-concurso"]').forEach(function (img) { img.classList.add('privado-img'); });
+})();
