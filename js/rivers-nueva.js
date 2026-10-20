@@ -173,7 +173,7 @@
 
   var css = document.createElement('style');
   css.textContent =
-    '.privado{filter:blur(.14em);user-select:none}' +
+    '.privado{filter:blur(min(.14em,18px));user-select:none}' +
     'img.privado-img{filter:blur(8px);clip-path:inset(0)}' +
     '.wa svg,.wa img{filter:blur(2px)}';
   document.head.appendChild(css);
