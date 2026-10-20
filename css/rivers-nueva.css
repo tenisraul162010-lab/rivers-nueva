@@ -1428,3 +1428,34 @@ main .feature { padding-bottom: 0; }
 @media (min-width: 1101px) {
   main .close .cta-actions, main .cta .cta-actions { flex-direction: column; align-items: flex-end; gap: 14px; }
 }
+
+/* ═════════ Pantallas grandes: el contenido no pasa de 1560 px y se centra; los fondos siguen a lo ancho ═════════ */
+@media (min-width: 1600px) {
+  :root { --wrap: 1560px; --lado: max(var(--margin), calc((100vw - var(--wrap)) / 2)); }
+  html { font-size: 106.25%; }
+  .bar { padding-left: var(--lado); padding-right: var(--lado); }
+  main > section:not(.hero):not(.cta):not(.close),
+  main > .strip, main > figure.quote-one,
+  .foot.foot-full { padding-left: var(--lado); padding-right: var(--lado); }
+  main > .strip { padding-left: var(--lado); padding-right: var(--lado); }
+  main .quote-one { margin-left: 0; margin-right: 0; max-width: none; padding-left: calc(var(--lado) + 8vw - var(--margin)); }
+  main .cta, main .close { margin-left: var(--lado); margin-right: var(--lado); }
+  main .ledger { padding-left: 0; }
+  main .quotes { padding-left: var(--lado); padding-right: var(--lado); }
+}
+@media (min-width: 2000px) { html { font-size: 118.75%; } }
+@media (min-width: 2400px) { html { font-size: 131.25%; } :root { --wrap: 1760px; } }
+
+/* Foto + texto en pantallas anchas: sin columna de sangría vacía, el texto ocupa su mitad y la foto no se dispara de alto */
+@media (min-width: 1400px) {
+  main .split { grid-template-columns: minmax(0, 5fr) minmax(0, 6fr); column-gap: clamp(48px, 6vw, 120px); align-items: center; }
+  main .split.flip { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+  main .split > .split-text { grid-column: 1; grid-row: 1; max-width: 34em; }
+  main .split > figure { grid-column: 2; grid-row: 1; }
+  main .split.flip > figure { grid-column: 1; }
+  main .split.flip > .split-text { grid-column: 2; }
+  main .split figure img { aspect-ratio: auto; height: clamp(480px, 38vw, 760px); }
+  main .split h2 { font-size: clamp(2.6rem, 1.2rem + 2.4vw, 4.6rem); }
+  main .split .split-text p { font-size: clamp(1.05rem, .9rem + .25vw, 1.25rem); line-height: 1.6; }
+}
+@media (min-width: 1400px) { main .split figure img { height: clamp(380px, 25vw, 520px); } }
