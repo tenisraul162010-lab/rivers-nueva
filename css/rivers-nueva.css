@@ -1405,3 +1405,26 @@ main .contact-links { align-self: start; }
   main .contact-photo { justify-self: stretch; max-width: none; }
 }
 @media (max-width: 760px) { main .contact-line, main .contact-links, main .contact-photo { grid-column: 1 / -1; } }
+
+/* Hecho por nosotras: la foto ya no crece sin límite, el texto va agrupado y no se suman dos márgenes debajo */
+main .feature { padding-bottom: 0; }
+@media (min-width: 761px) {
+  main .feature-photo img { aspect-ratio: auto; width: 100%; height: clamp(420px, 42vw, 620px); object-fit: cover; }
+  main .feature-text { grid-template-rows: none; align-content: center; gap: 0; }
+}
+
+/* "Por qué…" sin nota al lado: título arriba y la lista en dos columnas, sin hueco bajo el título */
+@media (min-width: 761px) {
+  main .field:not(:has(.field-note)) { grid-template-rows: none; row-gap: 36px; }
+  main .field:not(:has(.field-note)) h2 { grid-column: 1 / 9; grid-row: 1; }
+  main .field:not(:has(.field-note)) ul { grid-column: 1 / -1; grid-row: 2; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: clamp(32px, 5vw, 72px); }
+  main .field:not(:has(.field-note)) li:nth-last-child(2) { border-bottom: 1px solid color-mix(in srgb, var(--ink) 14%, transparent); }
+}
+@media (min-width: 761px) {
+  main .field:not(:has(.field-note)) li:last-child:nth-child(odd) { grid-column: 1 / -1; }
+  main .field:not(:has(.field-note)) li:last-child:nth-child(odd) ~ *, main .field:not(:has(.field-note)) li:nth-last-child(2):nth-child(even) { border-bottom: 0; }
+  main .close p, main .cta-line { max-width: 22ch; }
+}
+@media (min-width: 1101px) {
+  main .close .cta-actions, main .cta .cta-actions { flex-direction: column; align-items: flex-end; gap: 14px; }
+}
