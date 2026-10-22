@@ -1459,3 +1459,14 @@ main .feature { padding-bottom: 0; }
   main .split .split-text p { font-size: clamp(1.05rem, .9rem + .25vw, 1.25rem); line-height: 1.6; }
 }
 @media (min-width: 1400px) { main .split figure img { height: clamp(380px, 25vw, 520px); } }
+
+/* Antes y después: dos comparadores juntos, con su pie */
+main .compare { align-items: start; }
+main .compare .compare-text { grid-column: 1 / -1; }
+main .ad-pair { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(16px, 2.5vw, 32px); }
+main .ad-item { margin: 0; display: grid; gap: 12px; }
+main .ad-item .ad { max-height: min(78vh, 760px); }
+main .ad-item figcaption { font-family: var(--serif); font-variation-settings: "SOFT" 100, "opsz" 36; font-size: clamp(1.1rem, .95rem + .5vw, 1.4rem); color: var(--ink); }
+main .ad .ad-tirador svg { display: block; }
+@media (max-width: 760px) { main .ad-pair { grid-template-columns: 1fr; gap: 32px; } }
+main .ad-item .ad, main .compare .ad-item .ad { grid-column: 1 / -1; width: 100%; }

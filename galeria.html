@@ -136,14 +136,29 @@
     <h2 id="ad-h" class="reveal">Antes y después</h2>
     <p class="reveal">Desliza la barra para ver el cambio.</p>
   </div>
-  <div class="ad reveal" style="--pos:50%">
-    <img src="img/obra-bano-1.jpg" alt="Baño después de la reforma">
-    <img class="ad-antes" src="img/ejemplo-antes-bano.jpg" alt="Baño antes de la reforma">
-    <span class="ad-etiqueta izq">Antes</span><span class="ad-etiqueta der">Después</span>
-    <span class="ad-ejemplo">Ejemplo: falta la foto real del antes</span>
-    <div class="ad-linea"></div>
-    <input type="range" min="0" max="100" value="50" aria-label="Desliza para comparar el antes y el después">
-    <div class="ad-tirador" aria-hidden="true">‹›</div>
+  <div class="ad-pair">
+    <figure class="ad-item reveal">
+      <div class="ad" style="--pos:50%">
+        <img src="img/obra-bano-1.jpg" srcset="img/obra-bano-1-800.jpg 800w, img/obra-bano-1.jpg 1200w" sizes="(max-width: 760px) 100vw, 40vw" alt="Baño después de la reforma: ducha de obra con mampara negra y nicho iluminado" width="1200" height="1600" loading="lazy">
+        <img class="ad-antes" src="img/antes-bano.jpg" srcset="img/antes-bano-800.jpg 800w, img/antes-bano.jpg 1200w" sizes="(max-width: 760px) 100vw, 40vw" alt="Baño antes de la reforma, con bañera y mampara antigua" width="1200" height="1600" loading="lazy">
+        <span class="ad-etiqueta izq">Antes</span><span class="ad-etiqueta der">Después</span>
+        <div class="ad-linea"></div>
+        <input type="range" min="0" max="100" value="50" aria-label="Desliza para comparar el antes y el después: baño: de bañera a ducha de obra">
+        <div class="ad-tirador" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <figcaption>Baño: de bañera a ducha de obra</figcaption>
+    </figure>
+    <figure class="ad-item reveal">
+      <div class="ad" style="--pos:50%">
+        <img src="img/despues-terraza.jpg" srcset="img/despues-terraza-800.jpg 800w, img/despues-terraza.jpg 1200w" sizes="(max-width: 760px) 100vw, 40vw" alt="Terraza después de la reforma: pérgola, tarima y jacuzzi" width="1200" height="1600" loading="lazy">
+        <img class="ad-antes" src="img/antes-terraza.jpg" srcset="img/antes-terraza-800.jpg 800w, img/antes-terraza.jpg 1600w" sizes="(max-width: 760px) 100vw, 40vw" alt="Patio antes de la reforma, vacío y con suelo de hormigón" width="1600" height="1200" loading="lazy">
+        <span class="ad-etiqueta izq">Antes</span><span class="ad-etiqueta der">Después</span>
+        <div class="ad-linea"></div>
+        <input type="range" min="0" max="100" value="50" aria-label="Desliza para comparar el antes y el después: terraza: de patio vacío a terraza con jacuzzi">
+        <div class="ad-tirador" aria-hidden="true"><svg viewBox="0 0 24 24" width="22" height="22"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      </div>
+      <figcaption>Terraza: de patio vacío a terraza con jacuzzi</figcaption>
+    </figure>
   </div>
 </section>
 
