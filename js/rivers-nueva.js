@@ -8,9 +8,10 @@
   // Fotos de las tiras, filas y campos también entran al hacer scroll
   document.querySelectorAll('.strip img, .rows dl > div, .field li, .form > *, .run, .legal > *, .legal li, .bar-name, .bar-links > *').forEach(function (el) { el.classList.add('reveal'); });
 
-  // Entradas: cada pieza de la sección, con 70 ms entre una y otra
+  // Entradas: cada pieza de la sección, con 70 ms entre una y otra y como mucho 280 ms de espera,
+  // para que al bajar deprisa no queden huecos en blanco
   document.querySelectorAll('section, .strip, form, article').forEach(function (sec) {
-    sec.querySelectorAll('.reveal').forEach(function (el, i) { el.style.setProperty('--d', (i * 70) + 'ms'); });
+    sec.querySelectorAll('.reveal').forEach(function (el, i) { el.style.setProperty('--d', (Math.min(i, 4) * 70) + 'ms'); });
   });
   var targets = document.querySelectorAll('.reveal');
   var shutters = document.querySelectorAll('.shutter');

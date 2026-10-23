@@ -1508,3 +1508,30 @@ main .ad-item .ad, main .compare .ad-item .ad { grid-column: 1 / -1; width: 100%
   .form .form-sent { padding: 18px 16px 20px; }
   .form .form-sent-actions .btn { flex: 1 1 100%; justify-content: center; }
 }
+
+/* Tableta: Lo que hacemos en dos columnas de foto y texto, en vez de seis fotos a todo el ancho una tras otra */
+@media (min-width: 761px) and (max-width: 1100px) {
+  main .ledger-rows { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px 20px; }
+  main .ledger-rows li { position: relative; display: flex; flex-direction: column; }
+  main .ledger-rows li .l-phone { order: -1; aspect-ratio: 4 / 3; margin: 0 0 12px; }
+  main .ledger-rows li a { min-height: 0; padding: 0; }
+  main .ledger-rows li a::after { content: ""; position: absolute; inset: 0; }
+  main .ledger-rows li:active { background: var(--ground-2); }
+}
+
+/* Saltar al contenido: la portada recibe el foco sin marco alrededor de toda la foto */
+.hero:focus { outline: none; }
+
+/* Zonas de toque de 44 px en los enlaces sueltos de la portada */
+.intro-col .ulink, .feature-text .ulink { display: inline-flex; align-items: center; min-height: 44px; }
+
+/* Móvil: etiquetas del formulario un punto más grandes para leerlas sin acercar la pantalla */
+@media (max-width: 760px) {
+  .form label, .form .check, .form .form-note { font-size: .9375rem; }
+}
+
+/* Móvil: en el muro de la portada solo caben tres ladrillos por hilada (medido de 360 a 414 px);
+   los demás no se pintan y, al tener carga diferida, tampoco se descargan */
+@media (max-width: 760px) {
+  .wall .brick:nth-child(n+4) { display: none; }
+}

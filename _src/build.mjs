@@ -18,6 +18,17 @@ function srcset(html) {
   });
 }
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
+
+// La 404 la sirve GitHub Pages en cualquier dirección que no exista (también /rivers-nueva/a/b/c),
+// así que sus rutas relativas se escriben desde la raíz de la web. Los enlaces a #ancla se quedan como están.
+function fromRoot(html, base) {
+  const rel = u => /^(https?:|mailto:|tel:|data:|#|\/)/.test(u) ? u : base + u;
+  return html
+    .replace(/(\s(?:href|src)=")([^"]*)"/g, (m, a, u) => `${a}${rel(u)}"`)
+    .replace(/(\ssrcset=")([^"]*)"/g, (m, a, list) => `${a}${list.split(',').map(s => {
+      const [u, ...w] = s.trim().split(/\s+/); return [rel(u), ...w].join(' ');
+    }).join(', ')}"`);
+}
 const pagesDir = join(root, '_src', 'pages');
 
 // Mismo menú que la web original: Inicio, Quiénes somos, Servicios (4), Galería, Contacto y Pide presupuesto
@@ -146,7 +157,9 @@ for (const file of readdirSync(pagesDir).filter(f => f.endsWith('.html'))) {
     const i = line.indexOf(':');
     if (i > 0) meta[line.slice(0, i).trim()] = line.slice(i + 1).trim();
   }
-  writeFileSync(join(root, file), srcset(page(meta, m ? src.slice(m[0].length) : src, file)));
+  let html = srcset(page(meta, m ? src.slice(m[0].length) : src, file));
+  if (meta.root) html = fromRoot(html, meta.root);
+  writeFileSync(join(root, file), html);
   console.log('ok', file);
 }
 
