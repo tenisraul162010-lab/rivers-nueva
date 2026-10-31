@@ -109,10 +109,10 @@ ${robots ? `<meta name="robots" content="${robots}">\n` : ''}<link rel="icon" ty
 <meta property="og:site_name" content="Diseños y reformas River's">
 <meta property="og:title" content="${title}">
 <meta property="og:description" content="${description}">
-<meta property="og:image" content="https://tenisraul162010-lab.github.io/rivers-web/img/og.jpg">
+<meta property="og:image" content="https://tenisraul162010-lab.github.io/rivers-nueva/img/og.jpg">
 <link rel="preload" href="fonts/bricolagegrotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link href="css/fonts.css" rel="stylesheet">
-<link rel="canonical" href="https://tenisraul162010-lab.github.io/rivers-web/${file}">
+<link rel="canonical" href="https://tenisraul162010-lab.github.io/rivers-nueva/${file}">
 <link rel="stylesheet" href="css/rivers-nueva.css">
 <script>document.documentElement.classList.add('js')</script>
 </head>

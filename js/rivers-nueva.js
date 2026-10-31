@@ -115,7 +115,7 @@
       var list = visible(); cur = list.indexOf(im);
       if (cur < 0) { var k = im.getAttribute('src'); im = list.filter(function (x) { return x.getAttribute('src') === k; })[0] || im; cur = list.indexOf(im); }
       var label = im.alt || im.dataset.alt || '';
-      big.src = im.getAttribute('src').replace('-800.jpg', '.jpg'); big.alt = label; cap.textContent = label;
+      big.src = im.getAttribute('src').replace(/-800\.(jpg|webp)$/, '.jpg'); big.alt = label; cap.textContent = label;
     }
     function step(d) { var list = visible(); show(list[(cur + d + list.length) % list.length]); }
     wallImgs.forEach(function (im) { im.addEventListener('click', function () { show(im); dlg.showModal(); }); });
