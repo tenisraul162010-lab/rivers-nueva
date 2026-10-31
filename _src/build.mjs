@@ -70,6 +70,7 @@ export const foot = `<footer class="foot foot-full">
   <div class="foot-col">
     <p class="foot-name">Diseños y reformas River's</p>
     <p>Calle Carretera de Loeches 6<br>28500 Arganda del Rey, Madrid, España</p>
+    <p>Lunes a viernes, de 9:00 a 18:00</p>
   </div>
   <div class="foot-col">
     <p class="foot-h">Contacto</p>
