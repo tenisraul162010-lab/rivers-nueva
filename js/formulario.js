@@ -14,12 +14,21 @@
     form.addEventListener('input', function (e) { if (e.target.getAttribute('aria-invalid') === 'true') e.target.setAttribute('aria-invalid', 'false'); });
     form.addEventListener('change', function (e) { if (e.target.getAttribute('aria-invalid') === 'true') e.target.setAttribute('aria-invalid', 'false'); });
 
+    // Un teléfono tiene que tener de 9 a 15 cifras, sin contar espacios
+    function cifrasOk(campo) {
+      if (campo.type !== 'tel' && campo.name !== 'contacto') return true;
+      var v = campo.value;
+      if (campo.name === 'contacto' && v.indexOf('@') >= 0) return true;
+      var n = v.replace(/\D/g, '').length;
+      return n >= 9 && n <= 15;
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       var faltan = [], malos = [];
       form.querySelectorAll('[required]').forEach(function (campo) {
         var vacio = campo.type === 'checkbox' ? !campo.checked : !campo.value.trim();
-        var mal = vacio || !campo.checkValidity();
+        var mal = vacio || !campo.checkValidity() || !cifrasOk(campo);
         campo.setAttribute('aria-invalid', mal ? 'true' : 'false');
         if (vacio) faltan.push(campo.getAttribute('data-nombre'));
         else if (mal) malos.push(campo.getAttribute('data-nombre'));
