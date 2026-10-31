@@ -7,12 +7,22 @@ import { fileURLToPath } from 'node:url';
 
 // Fotos: el navegador elige la versión de 800 px o la grande según la pantalla
 import { existsSync } from 'node:fs';
+// Lee el ancho real de un JPG en su cabecera (el width del HTML no siempre coincide)
+function jpgWidth(file) {
+  const b = readFileSync(file);
+  for (let i = 2; i < b.length - 9;) {
+    if (b[i] !== 0xFF) { i++; continue; }
+    const m = b[i + 1];
+    if (m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC) return b.readUInt16BE(i + 7);
+    i += 2 + b.readUInt16BE(i + 2);
+  }
+  return 0;
+}
 function srcset(html) {
   return html.replace(/<img\b([^>]*?)\bsrc="img\/([^"]+?)\.jpg"([^>]*)>/g, (tag, pre, name, post) => {
     if (/srcset=|ledger-preview/.test(tag) || name.endsWith('-800') || !existsSync(join(root, 'img', name + '-800.jpg'))) return tag;
-    const w = +(tag.match(/\bwidth="(\d+)"/) || [])[1];
-    if (!w) return tag;
-    const big = Math.min(1600, w), small = Math.min(800, w);
+    const big = jpgWidth(join(root, 'img', name + '.jpg')), small = jpgWidth(join(root, 'img', name + '-800.jpg'));
+    if (!big || !small || small >= big) return tag;
     const sizes = /\bsizes=/.test(tag) ? '' : ' sizes="(max-width: 760px) 100vw, 50vw"';
     return `<img${pre}src="img/${name}.jpg" srcset="img/${name}-800.jpg ${small}w, img/${name}.jpg ${big}w"${sizes}${post}>`;
   });
@@ -33,9 +43,9 @@ export function bar(current, file) {
   const svc = services.map(([href, label]) =>
     `<a href="${href}"${href === file ? ' aria-current="page"' : ''}>${label}</a>`).join('\n        ');
   return `<header class="bar">
-  <a class="bar-name" href="index.html" aria-label="Diseños y reformas River's, inicio"><img src="img/foto1.png" alt="" width="420" height="278"></a>
+  <a class="bar-name" href="./" aria-label="Diseños y reformas River's, inicio"><img src="img/foto1.png" alt="" width="420" height="278"></a>
   <nav class="bar-links" aria-label="Navegación principal">
-    <a href="index.html"${cur('inicio')}>Inicio</a>
+    <a href="./"${cur('inicio')}>Inicio</a>
     <a href="quienes-somos.html"${cur('quienes')}>Quiénes somos</a>
     <div class="drop${current === 'servicios' ? ' is-current' : ''}">
       <button type="button" aria-expanded="false">Servicios <svg width="10" height="6" viewBox="0 0 10 6" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M1 1l4 4 4-4"/></svg></button>
@@ -55,7 +65,7 @@ export function menu(extraClass = '') {
   return `<details class="bar-menu${extraClass}">
     <summary>Menú</summary>
     <nav aria-label="Menú">
-      <a href="index.html">Inicio</a>
+      <a href="./">Inicio</a>
       <a href="quienes-somos.html">Quiénes somos</a>
       <p class="menu-group">Servicios</p>
       ${services.map(([href, label]) => `<a class="sub" href="${href}">${label}</a>`).join('\n      ')}

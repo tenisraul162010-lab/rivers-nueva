@@ -455,6 +455,7 @@ a { color: inherit; }
 .form .check input { width: 22px; height: 22px; margin: 1px 0 0; accent-color: var(--accent); flex: none; }
 .form .form-note { font-size: var(--step-small); color: var(--ink-soft); }
 .form .form-error { padding: 12px 14px; background: #fde8e2; color: #8a2d18; font-size: var(--step-small); }
+.form .form-ok { padding: 12px 14px; background: #e6f2e4; color: #24502a; font-size: var(--step-small); }
 .form-actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .btn.alt { background: var(--ink); }
 @media (hover: hover) and (pointer: fine) { .btn.alt:hover { background: #000; } }
