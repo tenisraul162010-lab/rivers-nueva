@@ -34,14 +34,15 @@ scripts: formulario
   <form class="form" data-formulario="Consulta desde la web" novalidate>
     <p class="form-note full">Los campos con * son obligatorios.</p>
     <label>Nombre *<input id="con-nombre" name="nombre" required autocomplete="name" data-nombre="Nombre"></label>
-    <label>Teléfono o email *<input id="con-contacto" name="contacto" required data-nombre="Teléfono o email"></label>
+    <label>Teléfono o email *<input id="con-contacto" name="contacto" required pattern=" *([^@ ]+@[^@ ]+[.][^@ ]+|[+]?[0-9 ]{9,16}) *" data-nombre="Teléfono o email"></label>
     <label class="full">Mensaje *<textarea id="con-mensaje" name="mensaje" rows="5" required data-nombre="Mensaje"></textarea></label>
-    <label class="check full"><input id="con-privacidad" type="checkbox" name="privacidad" required data-nombre="aceptar la Política de Privacidad"><span>He leído y acepto la <a class="ulink" href="politica-de-privacidad.html">Política de Privacidad</a> *</span></label>
+    <label class="check full"><input id="con-privacidad" type="checkbox" name="privacidad" required data-nombre="marcar que has leído la Política de Privacidad"><span>He leído la <a class="ulink" href="politica-de-privacidad.html">Política de Privacidad</a> *</span></label>
     <p class="form-error full hidden" role="alert"></p>
     <div class="form-actions full">
       <button type="submit" class="btn" data-via="whatsapp">Enviar por WhatsApp</button>
       <button type="submit" class="btn alt" data-via="email">Enviar por email</button>
     </div>
+    <p class="form-note full"><strong>Tus datos:</strong> los recibe Karol Castro Garavito (Diseños y reformas River's) solo para contestarte y preparar tu presupuesto. No los usamos para publicidad. Puedes pedir verlos, corregirlos o borrarlos en <a class="ulink" href="mailto:reformasrivers@gmail.com">reformasrivers@gmail.com</a>. Más detalles en la <a class="ulink" href="politica-de-privacidad.html">Política de privacidad</a>.</p>
   </form>
 </section>
 
