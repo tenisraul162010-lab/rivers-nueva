@@ -50,7 +50,16 @@
           encodeURIComponent(form.getAttribute('data-formulario') + ' - ' + nombre) +
           '&body=' + encodeURIComponent(texto);
       }
-      setTimeout(function () { window.location.href = 'gracias.html'; }, 1200);
+      // La web no puede saber si de verdad se envió, así que lo recordamos aquí mismo
+      var ok = form.querySelector('.form-ok');
+      if (!ok) {
+        ok = document.createElement('p');
+        ok.className = 'form-ok full';
+        ok.setAttribute('role', 'status');
+        form.querySelector('.form-actions').after(ok);
+      }
+      ok.textContent = (via === 'whatsapp' ? 'Se ha abierto WhatsApp' : 'Se ha abierto tu correo') +
+        ' con el mensaje ya escrito. Recuerda pulsar Enviar allí para que nos llegue. Si no se ha abierto, llámanos al 614 239 410.';
     });
   });
 })();
