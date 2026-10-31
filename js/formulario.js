@@ -16,15 +16,17 @@
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var faltan = [];
+      var faltan = [], malos = [];
       form.querySelectorAll('[required]').forEach(function (campo) {
         var vacio = campo.type === 'checkbox' ? !campo.checked : !campo.value.trim();
         var mal = vacio || !campo.checkValidity();
         campo.setAttribute('aria-invalid', mal ? 'true' : 'false');
-        if (mal) faltan.push(campo.getAttribute('data-nombre'));
+        if (vacio) faltan.push(campo.getAttribute('data-nombre'));
+        else if (mal) malos.push(campo.getAttribute('data-nombre'));
       });
-      if (faltan.length) {
-        error.textContent = 'Falta: ' + faltan.join(', ') + '.';
+      if (faltan.length || malos.length) {
+        error.textContent = (faltan.length ? 'Falta: ' + faltan.join(', ') + '. ' : '') +
+          (malos.length ? 'Revisa: ' + malos.join(', ') + ' (un teléfono de 9 cifras o un email válido).' : '');
         error.classList.remove('hidden');
         var primero = form.querySelector('[aria-invalid="true"]');
         if (primero) primero.focus();
