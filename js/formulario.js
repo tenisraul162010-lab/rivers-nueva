@@ -45,7 +45,6 @@
 
       var lineas = [form.getAttribute('data-formulario'), ''];
       form.querySelectorAll('[data-nombre]').forEach(function (campo) {
-        if (campo.name === 'privacidad') return;
         var valor = campo.type === 'checkbox' ? (campo.checked ? 'Sí' : 'No') : (campo.value.trim() || '-');
         lineas.push(campo.getAttribute('data-nombre') + ': ' + valor);
       });

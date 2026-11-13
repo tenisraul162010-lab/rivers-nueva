@@ -160,16 +160,11 @@
   });})();
 
 // Modo grabación: tapa los datos privados para grabar la pantalla y enseñar la web.
-// Se enciende con ?grabar en la dirección y sigue encendido al cambiar de página; ?grabar=0 lo apaga.
-// La web real no cambia: solo se tapa en la pestaña donde se activa.
+// Se enciende con ?grabar en la dirección, solo en esa página: no guarda nada en el navegador.
 (function () {
   // También vale #grabar, por si el servidor quita el ?grabar al redirigir
-  var q = new URLSearchParams(location.search + '&' + location.hash.slice(1)), on = false;
-  try {
-    if (q.has('grabar')) sessionStorage.setItem('grabar', q.get('grabar') === '0' ? '0' : '1');
-    on = sessionStorage.getItem('grabar') === '1';
-  } catch (e) { on = q.has('grabar') && q.get('grabar') !== '0'; }
-  if (!on) return;
+  var q = new URLSearchParams(location.search + '&' + location.hash.slice(1));
+  if (!q.has('grabar') || q.get('grabar') === '0') return;
 
   var css = document.createElement('style');
   css.textContent =
